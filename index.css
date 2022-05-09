@@ -190,10 +190,30 @@ select {
 /* -------------------- */
 
 .large-button {
+	position: relative;
 	display: grid;
+	z-index: 1;
 	place-items: center; /* combined with grid places text in the center */
 	padding: 1em;
 	border-radius: 50%;  /* turns the button into a circle*/
 	aspect-ratio: 1; /* turns the button square */
 	text-decoration: none;
+}
+
+.large-button::after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	background: hsl( var(--clr-light) /.15);
+	border-radius: 50%;
+	opacity: 0;
+	transition: opacity 500ms linear, transform 750ms ease-in-out;
+}
+
+.large-button:hover::after,
+.large-button:focus::after {
+	opacity: 1;
+	transform: scale(1.5);
 }
